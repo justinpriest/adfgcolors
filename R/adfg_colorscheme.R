@@ -1,31 +1,6 @@
 library(tidyverse)
 
-nmfs_colors <- c(
-  "process_blue" = "#0093D0",
-  "reflex_blue" = "#0055A4",
-  "PMS_541" = "#00467F",
-  "PMS_319" = "#1ECAD3",
-  "PMS_321" = "#008998",
-  "PMS_322" = "#007078",
-  "PMS_375" = "#93D500",
-  "PMS_362" = "#4C9C2E",
-  "PMS_356" = "#007934",
-  "custom" = "#7F7FFF",
-  "PMS_2725" = "#625BC4",
-  "PMS_7670" = "#575195",
-  "PMS_151" = "#FF8300",
-  "PMS_717" = "#D65F00",
-  "PMS_1525" = "#BC4700",
-  "warm_red" = "#FF4438",
-  "PMS_711" = "#D02C2F",
-  "PMS_1805" = "#B2292E",
-  "white" = "#FFFFFF",
-  "lt_gray_1" = "#E8E8E8",
-  "lt_gray_2" = "#D0D0D0",
-  "med_gray" = "#9A9A9A",
-  "dk_gray_1" = "#7B7B7B",
-  "dk_gray_2" = "#646464"
-)
+# http://paletton.com
 
 adfg_colors <- c(
   "adfg_blue" = "#0068A5",
@@ -33,14 +8,39 @@ adfg_colors <- c(
   "ice_blue" = "#DFEAEF",
   "sea_green" = "#9FD3C2",
   "bou_tan" = "#EFE9CD",
+  "bou_red" = "#7c1d25",
   "web_dblue1" = "#072F49",
   "web_dblue2" = "#194A6B",
   "web_lblue1" = "#427AA9",
-  "web_lblue2" = "#B5D9F3"
+  "web_lblue2" = "#B5D9F3",
+  "web_midblue" = "#537fa5",
+  "pinot" = "#903E2D",
+  "eveningblue" = "#346A8D",
+  "mustard" = "#DD973F",
+  "spruce" = "#6DB287",
+  "darkpurple" =  "#312740", #testing sunset
+  "sunsetpurp" = "#905e79", #testing sunset
+  "sunsetyellow" =  "#ffdf42", #testing sunset
+  "sunsetorange" = "#ff904b", #testing sunset
+  "sunsetred" = "#d35e52", #testing sunset
+  "auroragreen" = "#13eb66", 
+  "aurorablue" = '#58a9a7',
+  "aurorapurple" = "#7f60a4",
+  "glacier1" = "#012d8e",
+  "glacier2" = "#2c70bc",
+  "glacier3" = "#5db4e4",
+  "glacier4" = "#c7f4fa",
+  "totemred" = "#E07048",
+  "totemred2" = "#A94A32",
+  "totemforest" = "#6a9812",
+  "totemforest2" = "#415e12",
+  "totemcedar" = "#f0b358",
+  "totemteal" = "#58c9c0",
+  "totemblack" = "#2c2012"
 )
 
 
-nmfs_cols <- function(...) {
+colorlister <- function(...) {
   cols <- c(...)
   
   if (is.null(cols))
@@ -49,24 +49,19 @@ nmfs_cols <- function(...) {
   adfg_colors[cols]
 }
 
-nmfs_palettes <- list(
-  `logo` = nmfs_cols("adfg_blue",
-                     "ak_gold",
-                     "ice_blue",
-                     "sea_green",
-                     "bou_tan",
-                     "bou_red"),
-  `blues` = nmfs_cols("web_dblue1", 
-                      "web_lblue1", 
-                      "web_lblue1", "ice_blue")
-  #`oceans`  = nmfs_cols("process_blue", "reflex_blue", "PMS_541", "white"),
-  #`waves`  = nmfs_cols("PMS_319", "PMS_321", "PMS_322", "lt_gray_1"),
-  #`seagrass`   = nmfs_cols("PMS_375", "PMS_362", "PMS_356", "lt_gray_2"),
-  #`urchin` = nmfs_cols("custom", "PMS_2725", "PMS_7670", "med_gray"),
-  #`crustacean`  = nmfs_cols("PMS_151", "PMS_717", "PMS_1525", "dk_gray_1"),
-  #`coral` = nmfs_cols("warm_red", "PMS_711", "PMS_1805", "dk_gray_2"),
-  #`regional web` = nmfs_cols("PMS_541", "PMS_321","PMS_356","PMS_2725","PMS_717","PMS_1805"),
-  #"secondary" = nmfs_cols("PMS_322", "PMS_362", "PMS_7670", "dk_gray_2")
+adfg_palettes <- list(
+  `logo` = colorlister("adfg_blue", "ak_gold", "ice_blue",
+                       "sea_green", "bou_tan", "bou_red"),
+  `blues` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
+  `blues2` = colorlister("web_dblue1", "web_midblue", "web_lblue2"),
+  `tetrad` = colorlister("pinot", "eveningblue", "mustard", "spruce"),
+  `sitkasunset` = colorlister("darkpurple",  "sunsetpurp", "sunsetyellow", 
+                              "sunsetorange", "sunsetred"),
+  `aurora` = colorlister("auroragreen", "aurorablue", "aurorapurple"),
+  `glacier` = colorlister("glacier1", "glacier2", "glacier3", "glacier4"),
+  `totem` = colorlister("totemred", "totemred2", "totemforest", 
+                        "totemforest2", "totemcedar",
+                          "totemteal", "totemblack")
 )
 
 
@@ -74,8 +69,8 @@ nmfs_palettes <- list(
 
 
 
-nmfs_palette <- function(palette = "oceans", reverse = FALSE, ...) {
-  pal <- nmfs_palettes[[palette]]
+adfg_paletter <- function(palette = "logo", reverse = FALSE, ...) {
+  pal <- adfg_palettes[[palette]]
   
   if (reverse) pal <- rev(pal)
   
@@ -83,50 +78,57 @@ nmfs_palette <- function(palette = "oceans", reverse = FALSE, ...) {
 }
 
 
-display_nmfs_palette <- function(name, n, ...) {
-  pal <- nmfs_palette(name)(n)
+display_palette <- function(name, n, ...) {
+  pal <- adfg_paletter(name)(n)
   image(1:n, 1, as.matrix(1:n), col = pal, 
         xlab = paste(name), ylab = "", xaxt = "n", 
         yaxt = "n", bty = "n", ...)
   box()
 }
 
+display_palette("totem", 7)
 
-
-scale_color_nmfs <- function(palette = "oceans", discrete = TRUE, reverse = FALSE, ...) {
-  pal <- nmfs_palette(palette = palette, reverse = reverse)
+scale_color_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE, ...) {
+  pal <- adfg_paletter(palette = palette, 
+                       #if discrete = TRUE
+                       reverse = reverse)
   
-  if (discrete) {
-    discrete_scale("colour", paste0("nmfs_", palette), palette = pal, ...)
+  if (discrete == TRUE) {
+    discrete_scale("color", paste0("adfg_", palette), palette = pal, ...)
   } else {
-    scale_color_gradientn(colours = pal(256), ...)
+    scale_color_gradientn(colors = pal(256), ...)
   }
 }
 
 
-scale_fill_nmfs <- function(palette = "oceans", discrete = TRUE, reverse = FALSE, ...) {
-  pal <- nmfs_palette(palette = palette, reverse = reverse)
+scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE, ...) {
+  pal <- adfg_paletter(palette = palette, reverse = reverse)
   
-  if (discrete) {
-    discrete_scale("fill", paste0("nmfs_", palette), palette = pal, ...)
+  if (discrete == TRUE) {
+    discrete_scale("fill", paste0("adfg_", palette), palette = pal, ...)
   } else {
-    scale_fill_gradientn(colours = pal(256), ...)
+    scale_fill_gradientn(colors = pal(256), ...)
   }
 }
 
 mpgsub <- mpg %>%
-  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "ford", "dodge"))
+  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "ford", 
+                             "dodge", "subaru"))
+mpgsub4 <- mpg %>%
+  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota"))
 
-
-ggplot(mpgsub, aes(manufacturer, fill = manufacturer)) +
+View(mpg)
+ggplot(mpgsub4, aes(manufacturer, fill = manufacturer)) +
   geom_bar(color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_nmfs(palette = "logo", discrete = TRUE) 
+  scale_fill_adfg(palette = "tetrad", discrete = TRUE) 
 
-ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+ggplot(mpgsub4, aes(manufacturer, fill = manufacturer)) +
   geom_bar(color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_nmfs(palette = "blues", discrete = TRUE) 
+  scale_fill_adfg(palette = "totem", discrete = TRUE) 
 
-
+ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
+  geom_point() +
+  scale_color_adfg(palette = "blues", discrete = FALSE) 
 
