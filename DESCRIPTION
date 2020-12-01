@@ -1,16 +1,19 @@
 Package: adfgcolors
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: ADFG Color Palette Selection
+Version: 0.0.5.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Justin",
+           family = "Priest",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "justin.priest@alaska.gov",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: Color palettes and ggplot2 helper functions to standardize color selections
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Imports: 
+    ggplot2
+Suggests: 
+    testthat

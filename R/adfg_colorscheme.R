@@ -38,6 +38,17 @@ adfg_colors <- c(
 )
 
 
+#' Combine colors from a list
+#'
+#' Given a list of color names & hex colors, returns hex colors as a list
+#'
+#' @param ... Color names
+#'
+#' @return named character
+#' @export
+#'
+#' @examples
+#' colorlister("auroragreen")
 colorlister <- function(...) {
   cols <- c(...)
 
@@ -47,13 +58,15 @@ colorlister <- function(...) {
   adfg_colors[cols]
 }
 
+
+
 adfg_palettes <- list(
   #Order within this list which colors are first shown on plot
   `logo` = colorlister("adfg_blue", "ak_gold", "ice_blue",
                        "sea_green", "bou_tan", "bou_red"),
   `blues` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
   `blues2` = colorlister("web_dblue1", "web_midblue", "web_lblue2"),
-  `tetrad` = colorlister("pinot", "eveningblue", "mustard", "spruce"),
+  `tetrad` = colorlister("darkberry", "eveningblue", "mustard", "spruce"),
   `sitkasunset` = colorlister("darkpurple",  "sunsetpurp", "sunsetyellow",
                               "sunsetorange", "sunsetred"),
   `aurora` = colorlister("auroragreen", "aurorablue", "aurorapurple"),
@@ -68,26 +81,56 @@ adfg_palettes <- list(
 
 
 
-adfg_paletter <- function(palette = "logo", reverse = FALSE, ...) {
+#' Interpolate the selected palette
+#'
+#' @param palette Palette name in "adfg_palettes"
+#' @param reverse TRUE/FALSE of palette order
+#' @param ... Additional arguments
+#'
+#' @return Characters, hex values of colors
+#' @importFrom grDevices colorRampPalette
+#' @export
+#'
+#' @examples
+#' adfg_paletter("glacier")(7)
+adfg_paletter <- function(palette = "glacier", reverse = FALSE, ...) {
   pal <- adfg_palettes[[palette]]
 
   if (reverse) pal <- rev(pal)
 
   colorRampPalette(pal, ...)
-
 }
 
 
-exactpal <- function(pal = "logo"){
+#' Returns exact palette select, no interpolatio
+#'
+#' This function just returns the same colors as listed, in the order listed
+#' To be used only when "useexact" is called
+#'
+#' @param pal Palette name
+#'
+#' @return Character
+#' @export
+#'
+#' @examples
+exactpal <- function(pal = "totem"){
   out <- adfg_palettes[[pal]]
   out <- unname(out)
-  #structure(out, class = "adfgcolorpalette", name = pal)
-  # This function just returns the same colors as listed, in the order listed
-  # To be used only when "useexact" is called
 }
 
 
 
+#' Create a display box output of the selected palette
+#'
+#' @param name Palette name
+#' @param n Number of colors to display
+#' @param ... Other arguments
+#' @importFrom graphics box image
+#' @return Graphic device
+#' @export
+#'
+#' @examples
+#' display_palette("glacier", 7)
 display_palette <- function(name, n, ...) {
   pal <- adfg_paletter(name)(n)
   image(1:n, 1, as.matrix(1:n), col = pal,
@@ -98,6 +141,25 @@ display_palette <- function(name, n, ...) {
 
 
 
+#' Color scale helper to add directly to ggplot
+#'
+#' @param palette Palette name
+#' @param discrete TRUE/FALSE of whether aesthetic is discrete
+#' @param reverse TRUE/FALSE of palette order
+#' @param useexact TRUE/FALSE of whether to use palettes exactly, no interpolation
+#' @param ... Other arguments
+#'
+#' @importFrom ggplot2 ggplot geom_point discrete_scale scale_color_gradientn aes
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
+#'  geom_point() +
+#'  scale_color_adfg(palette = "glacier", discrete = FALSE)
+#' }
 scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE,
                              useexact = FALSE, ...) {
   pal <- adfg_paletter(palette = palette, reverse = reverse)
@@ -115,6 +177,25 @@ scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE
 
 
 
+#' Fill scale helper to add directly to ggplot
+#'
+#' @param palette Palette name
+#' @param discrete TRUE/FALSE of whether aesthetic is discrete
+#' @param reverse TRUE/FALSE of palette order
+#' @param useexact TRUE/FALSE of whether to use palettes exactly, no interpolation
+#' @param ... Other arguments
+#'
+#' @importFrom ggplot2 ggplot geom_point discrete_scale scale_fill_gradientn aes
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'  ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+#'  geom_bar(color = "black") +
+#'  scale_fill_adfg(palette = "glacier", discrete = TRUE)
+#' }
 scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE,
                             useexact = FALSE, ...) {
   pal <- adfg_paletter(palette = palette, reverse = reverse)
@@ -129,6 +210,8 @@ scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE,
     scale_fill_gradientn(colors = pal(256), ...)
   }
 }
+
+
 
 
 
