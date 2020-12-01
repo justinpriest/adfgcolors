@@ -2,6 +2,13 @@ library(tidyverse)
 
 # http://paletton.com
 
+library(devtools)
+packageVersion("devtools")
+
+
+create_package("C:/Users/jtpriest/Desktop/ADFG Local Repos/adfgcolors")
+
+
 adfg_colors <- c(
   "adfg_blue" = "#0068A5",
   "ak_gold" = "#FCDF2F",
@@ -23,7 +30,7 @@ adfg_colors <- c(
   "sunsetyellow" =  "#ffdf42", #testing sunset
   "sunsetorange" = "#ff904b", #testing sunset
   "sunsetred" = "#d35e52", #testing sunset
-  "auroragreen" = "#13eb66", 
+  "auroragreen" = "#13eb66",
   "aurorablue" = '#58a9a7',
   "aurorapurple" = "#7f60a4",
   "glacier1" = "#012d8e",
@@ -43,10 +50,10 @@ adfg_colors <- c(
 
 colorlister <- function(...) {
   cols <- c(...)
-  
+
   if (is.null(cols))
     return (adfg_colors)
-  
+
   adfg_colors[cols]
 }
 
@@ -57,7 +64,7 @@ adfg_palettes <- list(
   `blues` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
   `blues2` = colorlister("web_dblue1", "web_midblue", "web_lblue2"),
   `tetrad` = colorlister("pinot", "eveningblue", "mustard", "spruce"),
-  `sitkasunset` = colorlister("darkpurple",  "sunsetpurp", "sunsetyellow", 
+  `sitkasunset` = colorlister("darkpurple",  "sunsetpurp", "sunsetyellow",
                               "sunsetorange", "sunsetred"),
   `aurora` = colorlister("auroragreen", "aurorablue", "aurorapurple"),
   `glacier` = colorlister("glacier1", "glacier2", "glacier3", "glacier4"),
@@ -73,11 +80,11 @@ adfg_palettes <- list(
 
 adfg_paletter <- function(palette = "logo", reverse = FALSE, ...) {
   pal <- adfg_palettes[[palette]]
-  
+
   if (reverse) pal <- rev(pal)
 
   colorRampPalette(pal, ...)
-  
+
 }
 
 
@@ -93,8 +100,8 @@ exactpal <- function(pal = "logo"){
 
 display_palette <- function(name, n, ...) {
   pal <- adfg_paletter(name)(n)
-  image(1:n, 1, as.matrix(1:n), col = pal, 
-        xlab = paste(name), ylab = "", xaxt = "n", 
+  image(1:n, 1, as.matrix(1:n), col = pal,
+        xlab = paste(name), ylab = "", xaxt = "n",
         yaxt = "n", bty = "n", ...)
   box()
 }
@@ -104,7 +111,7 @@ display_palette <- function(name, n, ...) {
 scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE,
                              useexact = FALSE, ...) {
   pal <- adfg_paletter(palette = palette, reverse = reverse)
-  
+
   if (discrete == TRUE) {
     if (useexact == TRUE) {
       scale_color_manual(values = exactpal(palette))
@@ -118,10 +125,10 @@ scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE
 
 
 
-scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE, 
+scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE,
                             useexact = FALSE, ...) {
   pal <- adfg_paletter(palette = palette, reverse = reverse)
-  
+
   if (discrete == TRUE) {
     if (useexact == TRUE) {
       scale_fill_manual(values = exactpal(palette))
@@ -136,7 +143,7 @@ scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE,
 
 
 mpgsub <- mpg %>%
-  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "ford", 
+  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "ford",
                              "dodge", "subaru"))
 mpgsub5 <- mpg %>%
   filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "subaru"))
@@ -146,25 +153,25 @@ mpgsub5 <- mpg %>%
 ggplot(mpgsub4, aes(manufacturer, fill = manufacturer)) +
   geom_bar(color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_adfg(palette = "tetrad", discrete = TRUE) 
+  scale_fill_adfg(palette = "tetrad", discrete = TRUE)
 
 
 ggplot(mpgsub3, aes(manufacturer, fill = manufacturer)) +
   geom_bar(color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_adfg(palette = "rockfish", discrete = TRUE, useexact = TRUE) 
+  scale_fill_adfg(palette = "rockfish", discrete = TRUE, useexact = TRUE)
 
 
 
 ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
   geom_point() +
-  scale_color_adfg(palette = "rockfish", discrete = FALSE) 
+  scale_color_adfg(palette = "rockfish", discrete = FALSE)
 
 
 
 ggplot(mpgsub4, aes(x = hwy, y = cty, color = manufacturer)) +
   geom_point(size = 3) +
-  scale_color_adfg(palette = "tetrad", discrete = TRUE, useexact = TRUE) 
+  scale_color_adfg(palette = "tetrad", discrete = TRUE, useexact = TRUE)
 
 
 
