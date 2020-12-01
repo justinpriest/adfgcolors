@@ -14,7 +14,7 @@ adfg_colors <- c(
   "web_lblue1" = "#427AA9",
   "web_lblue2" = "#B5D9F3",
   "web_midblue" = "#537fa5",
-  "pinot" = "#903E2D",
+  "darkberry" = "#903E2D",
   "eveningblue" = "#346A8D",
   "mustard" = "#DD973F",
   "spruce" = "#6DB287",
@@ -30,13 +30,14 @@ adfg_colors <- c(
   "glacier2" = "#2c70bc",
   "glacier3" = "#5db4e4",
   "glacier4" = "#c7f4fa",
-  "totemred" = "#E07048",
-  "totemred2" = "#A94A32",
+  "totemred" = "#A94A32",
   "totemforest" = "#6a9812",
-  "totemforest2" = "#415e12",
   "totemcedar" = "#f0b358",
   "totemteal" = "#58c9c0",
-  "totemblack" = "#2c2012"
+  "totemblack" = "#2c2012",
+  "rockfishred" = "#a03b2a", #rockfish
+  "rockfishorange" = "#d37e3c", #rockfish
+  "rockfishyellow" = "#e1d03b" # rockfish
 )
 
 
@@ -50,6 +51,7 @@ colorlister <- function(...) {
 }
 
 adfg_palettes <- list(
+  #Order within this list which colors are first shown on plot
   `logo` = colorlister("adfg_blue", "ak_gold", "ice_blue",
                        "sea_green", "bou_tan", "bou_red"),
   `blues` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
@@ -59,9 +61,9 @@ adfg_palettes <- list(
                               "sunsetorange", "sunsetred"),
   `aurora` = colorlister("auroragreen", "aurorablue", "aurorapurple"),
   `glacier` = colorlister("glacier1", "glacier2", "glacier3", "glacier4"),
-  `totem` = colorlister("totemred", "totemred2", "totemforest", 
-                        "totemforest2", "totemcedar",
-                          "totemteal", "totemblack")
+  `totem` = colorlister("totemred", "totemforest", "totemteal", "totemcedar",
+                        "totemblack"),
+  `rockfish` = colorlister("rockfishred", "rockfishorange", "rockfishyellow")
 )
 
 
@@ -73,9 +75,20 @@ adfg_paletter <- function(palette = "logo", reverse = FALSE, ...) {
   pal <- adfg_palettes[[palette]]
   
   if (reverse) pal <- rev(pal)
-  
+
   colorRampPalette(pal, ...)
+  
 }
+
+
+exactpal <- function(pal = "logo"){
+  out <- adfg_palettes[[pal]]
+  out <- unname(out)
+  #structure(out, class = "adfgcolorpalette", name = pal)
+  # This function just returns the same colors as listed, in the order listed
+  # To be used only when "useexact" is called
+}
+
 
 
 display_palette <- function(name, n, ...) {
@@ -86,49 +99,77 @@ display_palette <- function(name, n, ...) {
   box()
 }
 
-display_palette("totem", 7)
 
-scale_color_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE, ...) {
-  pal <- adfg_paletter(palette = palette, 
-                       #if discrete = TRUE
-                       reverse = reverse)
+
+scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE,
+                             useexact = FALSE, ...) {
+  pal <- adfg_paletter(palette = palette, reverse = reverse)
   
   if (discrete == TRUE) {
+    if (useexact == TRUE) {
+      scale_color_manual(values = exactpal(palette))
+    }
+    else{
     discrete_scale("color", paste0("adfg_", palette), palette = pal, ...)
-  } else {
+  }} else {
     scale_color_gradientn(colors = pal(256), ...)
   }
 }
 
 
-scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE, ...) {
+
+scale_fill_adfg <- function(palette = "logo", discrete = TRUE, reverse = FALSE, 
+                            useexact = FALSE, ...) {
   pal <- adfg_paletter(palette = palette, reverse = reverse)
   
   if (discrete == TRUE) {
+    if (useexact == TRUE) {
+      scale_fill_manual(values = exactpal(palette))
+    }
+    else{
     discrete_scale("fill", paste0("adfg_", palette), palette = pal, ...)
-  } else {
+  }} else {
     scale_fill_gradientn(colors = pal(256), ...)
   }
 }
 
+
+
 mpgsub <- mpg %>%
   filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "ford", 
                              "dodge", "subaru"))
-mpgsub4 <- mpg %>%
-  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota"))
+mpgsub5 <- mpg %>%
+  filter(manufacturer %in% c("audi", "jeep", "nissan", "toyota", "subaru"))
 
-View(mpg)
+
+
 ggplot(mpgsub4, aes(manufacturer, fill = manufacturer)) +
   geom_bar(color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_fill_adfg(palette = "tetrad", discrete = TRUE) 
 
-ggplot(mpgsub4, aes(manufacturer, fill = manufacturer)) +
+
+ggplot(mpgsub3, aes(manufacturer, fill = manufacturer)) +
   geom_bar(color = "black") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_fill_adfg(palette = "totem", discrete = TRUE) 
+  scale_fill_adfg(palette = "rockfish", discrete = TRUE, useexact = TRUE) 
+
+
 
 ggplot(mpg, aes(x = hwy, y = cty, color = displ)) +
   geom_point() +
-  scale_color_adfg(palette = "blues", discrete = FALSE) 
+  scale_color_adfg(palette = "rockfish", discrete = FALSE) 
+
+
+
+ggplot(mpgsub4, aes(x = hwy, y = cty, color = manufacturer)) +
+  geom_point(size = 3) +
+  scale_color_adfg(palette = "tetrad", discrete = TRUE, useexact = TRUE) 
+
+
+
+
+
+
+
 
