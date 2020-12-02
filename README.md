@@ -5,14 +5,19 @@
 
 <!-- badges: start -->
 
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
 This package allows users to easily add common ADF\&G colors schemes in
 ggplot2
 
 Inspired by the amazing packages
-[PNWColors](https://github.com/jakelawlor/PNWColors) and
-[nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette).
+[nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette)
+and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the
+code from this package is from nmfspalette, written by [Christine
+Stawitz](https://github.com/ChristineStawitz-NOAA).
 
 ## Installation
 
@@ -33,26 +38,17 @@ library(adfgcolors)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Palette Choices
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+Colors are generally divided into two categories, discrete and
+continuous. Palettes are able to be used as either type, though
+generally the palettes described below as discrete display best when
+plotted for discrete data.
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+### Continuous (Sequential) Palettes
 
-You can also embed plots, for example:
+<img src="man/figures/README-colordemos_cont-1.png" width="100%" /><img src="man/figures/README-colordemos_cont-2.png" width="100%" /><img src="man/figures/README-colordemos_cont-3.png" width="100%" /><img src="man/figures/README-colordemos_cont-4.png" width="100%" /><img src="man/figures/README-colordemos_cont-5.png" width="100%" /><img src="man/figures/README-colordemos_cont-6.png" width="100%" /><img src="man/figures/README-colordemos_cont-7.png" width="100%" /><img src="man/figures/README-colordemos_cont-8.png" width="100%" />
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+### Discrete (Categorical) Palettes
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+<img src="man/figures/README-colordemos_disc-1.png" width="100%" /><img src="man/figures/README-colordemos_disc-2.png" width="100%" /><img src="man/figures/README-colordemos_disc-3.png" width="100%" /><img src="man/figures/README-colordemos_disc-4.png" width="100%" />

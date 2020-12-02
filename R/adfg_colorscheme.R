@@ -34,8 +34,19 @@ adfg_colors <- c(
   "totemblack" = "#2c2012",
   "rockfishred" = "#a03b2a", #rockfish
   "rockfishorange" = "#d37e3c", #rockfish
-  "rockfishyellow" = "#e1d03b" # rockfish
+  "rockfishyellow" = "#e1d03b", # rockfish
+  "darkturq" =  "#2A6A79",
+  "tangyorange" = "#F0803C",
+  "offred" = "#bf4950",   #B6686D"
+  "paleyellow" = "#F1F37C",
+  "coolblue" = "#5B7A9A",
+  "darklilac" = "#7C5066",
+  "lightmint" = "#78CE95"
 )
+
+
+
+
 
 
 #' Combine colors from a list
@@ -73,7 +84,8 @@ adfg_palettes <- list(
   `glacier` = colorlister("glacier1", "glacier2", "glacier3", "glacier4"),
   `totem` = colorlister("totemred", "totemforest", "totemteal", "totemcedar",
                         "totemblack"),
-  `rockfish` = colorlister("rockfishred", "rockfishorange", "rockfishyellow")
+  `rockfish` = colorlister("rockfishred", "rockfishorange", "rockfishyellow"),
+  `discrete7` = colorlister("darkturq", "tangyorange", "offred", "paleyellow", "coolblue" , "darklilac", "lightmint")
 )
 
 
