@@ -35,13 +35,19 @@ adfg_colors <- c(
   "rockfishred" = "#a03b2a", #rockfish
   "rockfishorange" = "#d37e3c", #rockfish
   "rockfishyellow" = "#e1d03b", # rockfish
-  "darkturq" =  "#2A6A79",
-  "tangyorange" = "#F0803C",
-  "offred" = "#bf4950",   #B6686D"
-  "paleyellow" = "#F1F37C",
-  "coolblue" = "#5B7A9A",
-  "darklilac" = "#7C5066",
-  "lightmint" = "#78CE95"
+  "darkturq" =  "#2A6A79",   # new discrete pal
+  "lightmint" = "#78CE95",
+  "offred" = "#bf4950",      # new discrete pal  #B6686D is alt
+  "paleyellow" = "#F1F37C",  # new discrete pal
+  "coolblue" = "#5B7A9A",    # new discrete pal
+  "darklilac" = "#7C5066",   # new discrete pal
+  "tangyorange" = "#F0803C", # new discrete pal
+  "gray1" = "#cccccc",
+  "gray2" = "#a3a3a3",
+  "gray3" = "#7a7a7a",
+  "gray4" = "#474747",
+  "black" = "#000000",
+  "white" = "#ffffff"
 )
 
 
@@ -85,7 +91,9 @@ adfg_palettes <- list(
   `totem` = colorlister("totemred", "totemforest", "totemteal", "totemcedar",
                         "totemblack"),
   `rockfish` = colorlister("rockfishred", "rockfishorange", "rockfishyellow"),
-  `discrete7` = colorlister("darkturq", "tangyorange", "offred", "paleyellow", "coolblue" , "darklilac", "lightmint")
+  `discrete7` = colorlister("darkturq", "tangyorange", "offred", "paleyellow", "coolblue" , "darklilac", "lightmint"),
+  `grays` = colorlister("gray4", "gray3", "gray2", "gray1"),
+  `grays_bw` = colorlister("black", "gray4", "gray3", "gray2", "gray1", "white")
 )
 
 

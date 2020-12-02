@@ -16,12 +16,13 @@ knitr::opts_chunk$set(
 # adfgcolors
 
 <!-- badges: start -->
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
 
 This package allows users to easily add common ADF&amp;G colors schemes in ggplot2
 
-Inspired by the amazing packages [PNWColors](https://github.com/jakelawlor/PNWColors) and [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette).
+Inspired by the amazing packages [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette) and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the code from this package is from nmfspalette, written by [Christine Stawitz](https://github.com/ChristineStawitz-NOAA).
 
 
 ## Installation
@@ -41,18 +42,32 @@ library(adfgcolors)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
+## Palette Choices
+Colors are generally divided into two categories, discrete and continuous. Palettes are able to be used as either type, though generally the palettes described below as discrete display best when plotted for discrete data.
+
+### Continuous (Sequential) Palettes
+```{r colordemos_cont, fig.height=2, echo = FALSE}
+display_palette("glacier", 7)
+display_palette("sitkasunset", 7)
+display_palette("aurora", 7)
+display_palette("rockfish", 7)
+display_palette("blues", 7)
+display_palette("blues2", 7)
+display_palette("grays", 7)
+display_palette("grays_bw", 7)
+
+
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+### Discrete (Categorical) Palettes
+```{r colordemos_disc, fig.height=2.25, echo = FALSE}
+display_palette("totem", 5)
+display_palette("logo", 6)
+display_palette("tetrad", 4)
+display_palette("discrete7", 7)
 
-You can also embed plots, for example:
 
-```{r pressure, echo = FALSE}
-plot(pressure)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+

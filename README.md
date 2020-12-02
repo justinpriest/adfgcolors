@@ -35,8 +35,14 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(adfgcolors)
-## basic example code
+library(ggplot2)
+ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+  geom_bar(color = "black") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_adfg(palette = "glacier", discrete = TRUE)
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
 
 ## Palette Choices
 
