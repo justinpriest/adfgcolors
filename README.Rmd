@@ -17,12 +17,14 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
 <!-- badges: end -->
 
+This package allows users to easily add useful and aesthetic colors schemes in ggplot2. adfgcolors is not endorsed by ADF&G.  
 
-This package allows users to easily add common ADF&amp;G colors schemes in ggplot2
+Inspired by the amazing packages [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette) and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the code for this package is from nmfspalette, written by [Christine Stawitz](https://github.com/ChristineStawitz-NOAA).
 
-Inspired by the amazing packages [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette) and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the code from this package is from nmfspalette, written by [Christine Stawitz](https://github.com/ChristineStawitz-NOAA).
+adfgcolors is still in active development with new palettes being added. Use at your own risk. 
 
 
 ## Installation
@@ -30,43 +32,68 @@ Inspired by the amazing packages [nmfspalette](https://github.com/nmfs-general-m
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("justinpriest/adfgcolors")
+# install.packages("remotes")
+remotes::install_github("justinpriest/adfgcolors")
 ```
-## Example
+## Example Usage
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
+adfgcolors allows you to quickly specify color palettes in ggplot by using the functions `scale_fill_adfg()` and `scale_color_adfg()`, shown below:  
+```{r demoplotglacier, fig.height=3}
 library(adfgcolors)
-## basic example code
+library(ggplot2)
+ggplot(mpg, aes(class, fill = class)) +
+  geom_bar(color = "black") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_adfg(palette = "glacier", discrete = TRUE) 
+
 ```
 
+A common need is for plots to be in grayscale, shown here:
+```{r demoplotgray, fig.height=3}
+library(adfgcolors)
+library(ggplot2)
+ggplot(mpg, aes(class, fill = class)) +
+  geom_bar(color = "black") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_adfg(palette = "grays_bw", discrete = TRUE) 
+```
+
+The color aesthetic is easy to modify:
+```{r demoplotcolor, fig.height=3}
+library(adfgcolors)
+library(ggplot2)
+ggplot(mpg, aes(x=displ, y = cty, color = cyl)) +
+  geom_point() + 
+  scale_color_adfg(palette = "aurora", discrete = FALSE) 
+
+```
+
+<br>  
 
 ## Palette Choices
-Colors are generally divided into two categories, discrete and continuous. Palettes are able to be used as either type, though generally the palettes described below as discrete display best when plotted for discrete data.
+Colors are generally divided into two categories, discrete and continuous. Palettes are able to be used as either type, though palettes described below as discrete display best when plotted for discrete data. Palettes are shown with hex codes for use in manual plotting, if desired. To show palettes, use function `display_palette()`.
 
 ### Continuous (Sequential) Palettes
-```{r colordemos_cont, fig.height=2, echo = FALSE}
-display_palette("glacier", 7)
-display_palette("sitkasunset", 7)
-display_palette("aurora", 7)
-display_palette("rockfish", 7)
-display_palette("blues", 7)
-display_palette("blues2", 7)
-display_palette("grays", 7)
-display_palette("grays_bw", 7)
+```{r colordemos_cont, fig.height = 2, echo = FALSE}
+pallistcont <- c("glacier", "sitkasunset", "aurora", "rockfish", "blues2", "grays", "grays_bw")
+# excluding "blues"
 
+for(j in 1:length(pallistcont)){
+  display_palette(pallistcont[j], 7)
+}
 
 ```
 
+<br>  
+ 
 ### Discrete (Categorical) Palettes
 ```{r colordemos_disc, fig.height=2.25, echo = FALSE}
-display_palette("totem", 5)
-display_palette("logo", 6)
-display_palette("tetrad", 4)
-display_palette("discrete7", 7)
+pallistdisc <- c("totem", "logo", "tetrad", "discrete7")
+optlen <- c(5, 6, 4, 7)
 
+for(j in 1:length(pallistdisc)){
+  display_palette(pallistdisc[j], optlen[j])
+}
 
 ```
 

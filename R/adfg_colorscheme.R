@@ -151,13 +151,34 @@ exactpal <- function(pal = "totem"){
 #'
 #' @examples
 #' display_palette("glacier", 7)
+
 display_palette <- function(name, n, ...) {
   pal <- adfg_paletter(name)(n)
+
+  old <- par(mar = c(0.25, 0.25, 0.25, 0.25))
+  on.exit(par(old))
+
   image(1:n, 1, as.matrix(1:n), col = pal,
-        xlab = paste(name), ylab = "", xaxt = "n",
+        xlab = "",
+        ylab = "", xaxt = "n",
         yaxt = "n", bty = "n", ...)
-  box()
+
+  rect(0, 0.8, n + 1, 1, col = rgb(1, 1, 1, 0.8), border = NA) # opaque rect
+  text((n + 1) / 2, 0.9, labels = paste(name), cex = 1.5, family = "sans", col = "#32373D") # palette name
+  rect(0, 0.6, 7 + 1, 0.8, col = rgb(1, 1, 1, 1), border = NA) # white bottom fill
+  rect(0.5, 0.8, n +0.5, 1.4, col = rgb(1, 1, 1, 0), border = "#000000") # black border
+  text((1:n), 0.7, labels = paste(pal), srt = 45, cex = 0.78, family = "sans", col = "#32373D") # hex labels
 }
+
+# OLD
+# display_palette <- function(name, n, ...) {
+#   pal <- adfg_paletter(name)(n)
+#   image(1:n, 1, as.matrix(1:n), col = pal,
+#         xlab = paste(name), ylab = "", xaxt = "n",
+#         yaxt = "n", bty = "n", ...)
+#   box()
+# }
+
 
 
 
