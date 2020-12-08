@@ -20,11 +20,9 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-This package allows users to easily add useful and aesthetic colors schemes in ggplot2. adfgcolors is not endorsed by ADF&G.  
+This package allows users to easily add useful and aesthetic colors schemes in ggplot2. Influenced by the amazing packages [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette) and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the code for this package is from nmfspalette, written by [Christine Stawitz](https://github.com/ChristineStawitz-NOAA).
 
-Inspired by the amazing packages [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette) and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the code for this package is from nmfspalette, written by [Christine Stawitz](https://github.com/ChristineStawitz-NOAA).
-
-adfgcolors is still in active development with new palettes being added. Use at your own risk. 
+adfgcolors is still in active development with new palettes being added. adfgcolors is not endorsed by ADF&G.  
 
 
 ## Installation

@@ -1,6 +1,6 @@
 Package: adfgcolors
 Title: ADFG Color Palette Selection
-Version: 0.1.0.0
+Version: 0.1.5.0
 Authors@R: 
     person(given = "Justin",
            family = "Priest",

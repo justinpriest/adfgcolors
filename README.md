@@ -12,16 +12,14 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 <!-- badges: end -->
 
 This package allows users to easily add useful and aesthetic colors
-schemes in ggplot2. adfgcolors is not endorsed by ADF\&G.
-
-Inspired by the amazing packages
+schemes in ggplot2. Influenced by the amazing packages
 [nmfspalette](https://github.com/nmfs-general-modeling-tools/nmfspalette)
 and [PNWColors](https://github.com/jakelawlor/PNWColors). Much of the
 code for this package is from nmfspalette, written by [Christine
 Stawitz](https://github.com/ChristineStawitz-NOAA).
 
 adfgcolors is still in active development with new palettes being added.
-Use at your own risk.
+adfgcolors is not endorsed by ADF\&G.
 
 ## Installation
 

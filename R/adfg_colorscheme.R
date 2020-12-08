@@ -52,9 +52,6 @@ adfg_colors <- c(
 
 
 
-
-
-
 #' Combine colors from a list
 #'
 #' Given a list of color names & hex colors, returns hex colors as a list
@@ -155,7 +152,7 @@ exactpal <- function(pal = "totem"){
 display_palette <- function(name, n, ...) {
   pal <- adfg_paletter(name)(n)
 
-  old <- par(mar = c(0.25, 0.25, 0.25, 0.25))
+  old <- par(mar = c(1.625, 0.25, 0.25, 0.25))
   on.exit(par(old))
 
   image(1:n, 1, as.matrix(1:n), col = pal,
@@ -167,7 +164,7 @@ display_palette <- function(name, n, ...) {
   text((n + 1) / 2, 0.9, labels = paste(name), cex = 1.5, family = "sans", col = "#32373D") # palette name
   rect(0, 0.6, 7 + 1, 0.8, col = rgb(1, 1, 1, 1), border = NA) # white bottom fill
   rect(0.5, 0.8, n +0.5, 1.4, col = rgb(1, 1, 1, 0), border = "#000000") # black border
-  text((1:n), 0.7, labels = paste(pal), srt = 45, cex = 0.78, family = "sans", col = "#32373D") # hex labels
+  text((1:n), 0.7, labels = paste(pal), srt = 35, cex = 0.75, family = "sans", col = "#32373D") # hex labels
 }
 
 # OLD
@@ -184,7 +181,7 @@ display_palette <- function(name, n, ...) {
 
 #' Color scale helper to add directly to ggplot
 #'
-#' @param palette Palette name
+#' @param palette Palette name. Currently, options are
 #' @param discrete TRUE/FALSE of whether aesthetic is discrete
 #' @param reverse TRUE/FALSE of palette order
 #' @param useexact TRUE/FALSE of whether to use palettes exactly, no interpolation
