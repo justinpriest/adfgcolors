@@ -73,6 +73,19 @@ ggplot(mpg, aes(x=displ, y = cty, color = cyl)) +
 
 <img src="man/figures/README-demoplotcolor-1.png" width="100%" />
 
+Often, discrete variable plots look best if the exact order of colors
+are used (no interpolation):
+
+``` r
+library(adfgcolors)
+library(ggplot2)
+ggplot(mpg, aes(drv, fill = drv)) +
+  geom_bar(color = "black") + 
+  scale_fill_adfg(palette = "bristolbay", discrete = TRUE, useexact = TRUE) 
+```
+
+<img src="man/figures/README-demoplotexact-1.png" width="100%" />
+
 <br>
 
 ## Palette Choices
@@ -91,4 +104,6 @@ desired. To show palettes, use function `display_palette()`.
 
 ### Discrete (Categorical) Palettes
 
-<img src="man/figures/README-colordemos_disc-1.png" width="100%" /><img src="man/figures/README-colordemos_disc-2.png" width="100%" /><img src="man/figures/README-colordemos_disc-3.png" width="100%" /><img src="man/figures/README-colordemos_disc-4.png" width="100%" />
+*Consider using argument* `useexact = TRUE` *when plotting discrete
+variables as it will use the exact order of palettes shown below.*
+<img src="man/figures/README-colordemos_disc-1.png" width="100%" /><img src="man/figures/README-colordemos_disc-2.png" width="100%" /><img src="man/figures/README-colordemos_disc-3.png" width="100%" /><img src="man/figures/README-colordemos_disc-4.png" width="100%" /><img src="man/figures/README-colordemos_disc-5.png" width="100%" /><img src="man/figures/README-colordemos_disc-6.png" width="100%" />

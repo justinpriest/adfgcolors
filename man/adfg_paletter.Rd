@@ -17,7 +17,7 @@ adfg_paletter(palette = "glacier", reverse = FALSE, ...)
 Characters, hex values of colors
 }
 \description{
-Interpolate the selected palette
+Create an interpolated palette of length n for plotting.
 }
 \examples{
 adfg_paletter("glacier")(7)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/adfg_colorscheme.R
 \name{exactpal}
 \alias{exactpal}
-\title{Returns exact palette select, no interpolatio}
+\title{Return exact palette selected without interpolation}
 \usage{
 exactpal(pal = "totem")
 }
@@ -13,6 +13,9 @@ exactpal(pal = "totem")
 Character
 }
 \description{
-This function just returns the same colors as listed, in the order listed
-To be used only when "useexact" is called
+This function just returns the same colors as listed, in the order listed.
+To be used only when "useexact" is called.
+}
+\examples{
+exactpal("totem")
 }

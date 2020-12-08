@@ -19,15 +19,23 @@ scale_fill_adfg(
 
 \item{reverse}{TRUE/FALSE of palette order}
 
-\item{useexact}{TRUE/FALSE of whether to use palettes exactly, no interpolation}
+\item{useexact}{TRUE/FALSE of whether to use palettes exactly, no
+interpolation}
 
 \item{...}{Other arguments}
 }
 \value{
-
+The output returned will be either an object of
+\code{scale_fill_manual()}, \code{discrete_scale()}, or
+\code{scale_fill_gradientn()}
 }
 \description{
-Fill scale helper to add directly to ggplot
+\code{scale_fill_adfg} adds a fill scale directly to an existing ggplot.
+Currently, continuous palette options are: "glacier", "sitkasunset",
+"aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
+options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
+For discrete scales, to use exact color palette without interpolation, use
+argument \code{useexact = TRUE}.
 }
 \examples{
 \dontrun{
@@ -35,4 +43,7 @@ Fill scale helper to add directly to ggplot
  geom_bar(color = "black") +
  scale_fill_adfg(palette = "glacier", discrete = TRUE)
 }
+}
+\seealso{
+\code{\link{scale_color_adfg}}
 }

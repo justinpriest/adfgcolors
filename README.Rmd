@@ -66,6 +66,16 @@ ggplot(mpg, aes(x=displ, y = cty, color = cyl)) +
 
 ```
 
+Often, discrete variable plots look best if the exact order of colors are used (no interpolation):
+```{r demoplotexact, fig.height=3}
+library(adfgcolors)
+library(ggplot2)
+ggplot(mpg, aes(drv, fill = drv)) +
+  geom_bar(color = "black") + 
+  scale_fill_adfg(palette = "bristolbay", discrete = TRUE, useexact = TRUE) 
+```
+
+
 <br>  
 
 ## Palette Choices
@@ -84,10 +94,11 @@ for(j in 1:length(pallistcont)){
 
 <br>  
  
-### Discrete (Categorical) Palettes
+### Discrete (Categorical) Palettes 
+_Consider using argument_ `useexact = TRUE` _when plotting discrete variables as it will use the exact order of palettes shown below._
 ```{r colordemos_disc, fig.height=2.25, echo = FALSE}
-pallistdisc <- c("totem", "logo", "tetrad", "discrete7")
-optlen <- c(5, 6, 4, 7)
+pallistdisc <- c("totem", "logo", "tetrad", "berries", "bristolbay", "discrete7")
+optlen <- c(5, 6, 4, 5, 7, 7)
 
 for(j in 1:length(pallistdisc)){
   display_palette(pallistdisc[j], optlen[j])

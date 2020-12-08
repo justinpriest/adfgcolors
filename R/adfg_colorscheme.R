@@ -47,9 +47,30 @@ adfg_colors <- c(
   "gray3" = "#7a7a7a",
   "gray4" = "#474747",
   "black" = "#000000",
-  "white" = "#ffffff"
+  "white" = "#ffffff",
+  "salmonberry" = "#E67B54",
+  "huckleberry" = "#45405A",
+  "cloudberry" = "#F8CD98",
+  "strawberry" = "#BF1724",
+  "berrypickinghands" = "#A59FBE",
+  "bb_orange" = "#fba04b",
+  "bb_red" =   "#ce3b40",
+  "bb_green" = "#48944e",
+  "bb_blue" =  "#33658a",
+  "bb_pink" =  "#cc609f",
+  "bb_gray" =  "#929ba0",
+  "bb_violet" = "#852962"
 )
 
+
+#JTP new 6
+# #fba04b, #ce3b40, #b05393, #33658a, #fc4a9d, #929ba0, #32c33c
+
+# red to blue gradient
+#212178, #584dac, #907ed9, #cab3fb, #f5f5f5, #fbb49f, #fc664a, #d70508, #8b0000
+
+# coho
+#905f3c, #d7663d, #6aafb4, #e7ac36, #453e36, #b72810
 
 
 #' Combine colors from a list
@@ -75,7 +96,7 @@ colorlister <- function(...) {
 
 
 adfg_palettes <- list(
-  #Order within this list which colors are first shown on plot
+  # Order within this list to show which colors are first on plot
   `logo` = colorlister("adfg_blue", "ak_gold", "ice_blue",
                        "sea_green", "bou_tan", "bou_red"),
   `blues` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
@@ -90,15 +111,18 @@ adfg_palettes <- list(
   `rockfish` = colorlister("rockfishred", "rockfishorange", "rockfishyellow"),
   `discrete7` = colorlister("darkturq", "tangyorange", "offred", "paleyellow", "coolblue" , "darklilac", "lightmint"),
   `grays` = colorlister("gray4", "gray3", "gray2", "gray1"),
-  `grays_bw` = colorlister("black", "gray4", "gray3", "gray2", "gray1", "white")
+  `grays_bw` = colorlister("black", "gray4", "gray3", "gray2", "gray1", "white"),
+  `berries` = colorlister("salmonberry", "huckleberry", "cloudberry", "strawberry", "berrypickinghands"),
+  `bristolbay` = colorlister("bb_orange", "bb_red", "bb_blue", "bb_green", "bb_pink", "bb_gray", "bb_violet")
 )
 
 
 
 
 
-
 #' Interpolate the selected palette
+#'
+#' Create an interpolated palette of length n for plotting.
 #'
 #' @param palette Palette name in "adfg_palettes"
 #' @param reverse TRUE/FALSE of palette order
@@ -119,10 +143,10 @@ adfg_paletter <- function(palette = "glacier", reverse = FALSE, ...) {
 }
 
 
-#' Returns exact palette select, no interpolatio
+#' Return exact palette selected without interpolation
 #'
-#' This function just returns the same colors as listed, in the order listed
-#' To be used only when "useexact" is called
+#' This function just returns the same colors as listed, in the order listed.
+#' To be used only when "useexact" is called.
 #'
 #' @param pal Palette name
 #'
@@ -130,6 +154,7 @@ adfg_paletter <- function(palette = "glacier", reverse = FALSE, ...) {
 #' @export
 #'
 #' @examples
+#' exactpal("totem")
 exactpal <- function(pal = "totem"){
   out <- adfg_palettes[[pal]]
   out <- unname(out)
@@ -139,10 +164,14 @@ exactpal <- function(pal = "totem"){
 
 #' Create a display box output of the selected palette
 #'
+#' \code{display_palette} shows color output and hex codes for the selected
+#' palette in order to assist with palette selection.
+#'
 #' @param name Palette name
 #' @param n Number of colors to display
 #' @param ... Other arguments
-#' @importFrom graphics box image
+#' @importFrom graphics box image par rect text
+#' @importFrom grDevices rgb
 #' @return Graphic device
 #' @export
 #'
@@ -162,34 +191,38 @@ display_palette <- function(name, n, ...) {
 
   rect(0, 0.8, n + 1, 1, col = rgb(1, 1, 1, 0.8), border = NA) # opaque rect
   text((n + 1) / 2, 0.9, labels = paste(name), cex = 1.5, family = "sans", col = "#32373D") # palette name
-  rect(0, 0.6, 7 + 1, 0.8, col = rgb(1, 1, 1, 1), border = NA) # white bottom fill
+  rect(0, 0.6, n + 1, 0.8, col = rgb(1, 1, 1, 1), border = NA) # white bottom fill
   rect(0.5, 0.8, n +0.5, 1.4, col = rgb(1, 1, 1, 0), border = "#000000") # black border
   text((1:n), 0.7, labels = paste(pal), srt = 35, cex = 0.75, family = "sans", col = "#32373D") # hex labels
 }
-
-# OLD
-# display_palette <- function(name, n, ...) {
-#   pal <- adfg_paletter(name)(n)
-#   image(1:n, 1, as.matrix(1:n), col = pal,
-#         xlab = paste(name), ylab = "", xaxt = "n",
-#         yaxt = "n", bty = "n", ...)
-#   box()
-# }
 
 
 
 
 #' Color scale helper to add directly to ggplot
 #'
-#' @param palette Palette name. Currently, options are
+#' \code{scale_color_adfg} adds a color scale directly to an existing ggplot.
+#' Currently, continuous palette options are: "glacier", "sitkasunset",
+#' "aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
+#' options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
+#' For discrete scales, to use exact color palette without interpolation, use
+#' argument \code{useexact = TRUE}.
+#'
+#' @param palette Palette name.
 #' @param discrete TRUE/FALSE of whether aesthetic is discrete
 #' @param reverse TRUE/FALSE of palette order
-#' @param useexact TRUE/FALSE of whether to use palettes exactly, no interpolation
+#' @param useexact TRUE/FALSE of whether to use palettes exactly, no
+#'   interpolation
 #' @param ... Other arguments
 #'
-#' @importFrom ggplot2 ggplot geom_point discrete_scale scale_color_gradientn aes
+#' @importFrom ggplot2 ggplot geom_point discrete_scale scale_color_gradientn
+#'   aes scale_color_manual
 #'
-#' @return
+#' @seealso \code{\link{scale_fill_adfg}}
+#'
+#' @return The output returned will be either an object of
+#'   \code{scale_color_manual()}, \code{discrete_scale()}, or
+#'   \code{scale_color_gradientn()}
 #' @export
 #'
 #' @examples
@@ -217,15 +250,29 @@ scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE
 
 #' Fill scale helper to add directly to ggplot
 #'
+#' \code{scale_fill_adfg} adds a fill scale directly to an existing ggplot.
+#' Currently, continuous palette options are: "glacier", "sitkasunset",
+#' "aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
+#' options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
+#' For discrete scales, to use exact color palette without interpolation, use
+#' argument \code{useexact = TRUE}.
+#'
+#'
 #' @param palette Palette name
 #' @param discrete TRUE/FALSE of whether aesthetic is discrete
 #' @param reverse TRUE/FALSE of palette order
-#' @param useexact TRUE/FALSE of whether to use palettes exactly, no interpolation
+#' @param useexact TRUE/FALSE of whether to use palettes exactly, no
+#'   interpolation
 #' @param ... Other arguments
 #'
-#' @importFrom ggplot2 ggplot geom_point discrete_scale scale_fill_gradientn aes
+#' @importFrom ggplot2 ggplot geom_point discrete_scale scale_fill_gradientn
+#'   scale_fill_manual aes
 #'
-#' @return
+#' @seealso \code{\link{scale_color_adfg}}
+#'
+#' @return The output returned will be either an object of
+#'   \code{scale_fill_manual()}, \code{discrete_scale()}, or
+#'   \code{scale_fill_gradientn()}
 #' @export
 #'
 #' @examples

@@ -17,7 +17,8 @@ display_palette(name, n, ...)
 Graphic device
 }
 \description{
-Create a display box output of the selected palette
+\code{display_palette} shows color output and hex codes for the selected
+palette in order to assist with palette selection.
 }
 \examples{
 display_palette("glacier", 7)

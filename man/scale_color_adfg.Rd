@@ -13,21 +13,29 @@ scale_color_adfg(
 )
 }
 \arguments{
-\item{palette}{Palette name}
+\item{palette}{Palette name.}
 
 \item{discrete}{TRUE/FALSE of whether aesthetic is discrete}
 
 \item{reverse}{TRUE/FALSE of palette order}
 
-\item{useexact}{TRUE/FALSE of whether to use palettes exactly, no interpolation}
+\item{useexact}{TRUE/FALSE of whether to use palettes exactly, no
+interpolation}
 
 \item{...}{Other arguments}
 }
 \value{
-
+The output returned will be either an object of
+\code{scale_color_manual()}, \code{discrete_scale()}, or
+\code{scale_color_gradientn()}
 }
 \description{
-Color scale helper to add directly to ggplot
+\code{scale_color_adfg} adds a color scale directly to an existing ggplot.
+Currently, continuous palette options are: "glacier", "sitkasunset",
+"aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
+options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
+For discrete scales, to use exact color palette without interpolation, use
+argument \code{useexact = TRUE}.
 }
 \examples{
 \dontrun{
@@ -35,4 +43,7 @@ Color scale helper to add directly to ggplot
  geom_point() +
  scale_color_adfg(palette = "glacier", discrete = FALSE)
 }
+}
+\seealso{
+\code{\link{scale_fill_adfg}}
 }
