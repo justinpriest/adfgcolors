@@ -98,7 +98,7 @@ desired. To show palettes, use function `display_palette()`.
 
 ### Continuous (Sequential) Palettes
 
-<img src="man/figures/README-colordemos_cont-1.png" width="100%" /><img src="man/figures/README-colordemos_cont-2.png" width="100%" /><img src="man/figures/README-colordemos_cont-3.png" width="100%" /><img src="man/figures/README-colordemos_cont-4.png" width="100%" /><img src="man/figures/README-colordemos_cont-5.png" width="100%" /><img src="man/figures/README-colordemos_cont-6.png" width="100%" /><img src="man/figures/README-colordemos_cont-7.png" width="100%" />
+<img src="man/figures/README-colordemos_cont-1.png" width="100%" /><img src="man/figures/README-colordemos_cont-2.png" width="100%" /><img src="man/figures/README-colordemos_cont-3.png" width="100%" /><img src="man/figures/README-colordemos_cont-4.png" width="100%" />
 
 <br>
 
@@ -106,4 +106,12 @@ desired. To show palettes, use function `display_palette()`.
 
 *Consider using argument* `useexact = TRUE` *when plotting discrete
 variables as it will use the exact order of palettes shown below.*
-<img src="man/figures/README-colordemos_disc-1.png" width="100%" /><img src="man/figures/README-colordemos_disc-2.png" width="100%" /><img src="man/figures/README-colordemos_disc-3.png" width="100%" /><img src="man/figures/README-colordemos_disc-4.png" width="100%" /><img src="man/figures/README-colordemos_disc-5.png" width="100%" /><img src="man/figures/README-colordemos_disc-6.png" width="100%" />
+<img src="man/figures/README-colordemos_disc-1.png" width="100%" /><img src="man/figures/README-colordemos_disc-2.png" width="100%" /><img src="man/figures/README-colordemos_disc-3.png" width="100%" /><img src="man/figures/README-colordemos_disc-4.png" width="100%" />
+
+### Other Palettes
+
+**More continuous palettes**  
+<img src="man/figures/README-otherpalettescont-1.png" width="100%" /><img src="man/figures/README-otherpalettescont-2.png" width="100%" />
+
+**More discrete palettes**
+<img src="man/figures/README-otherpalettesdisc-1.png" width="100%" /><img src="man/figures/README-otherpalettesdisc-2.png" width="100%" />

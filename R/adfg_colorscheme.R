@@ -59,18 +59,29 @@ adfg_colors <- c(
   "bb_blue" =  "#33658a",
   "bb_pink" =  "#cc609f",
   "bb_gray" =  "#929ba0",
-  "bb_violet" = "#852962"
+  "bb_violet" = "#852962",
+  "burntorange" = "#905f3c",
+  "orangered" = "#d7663d",
+  "cohoteal" = "#6aafb4",
+  "cohoyellow" = "#e7ac36",
+  "cohobrown" = "#453e36", ##5c5349 alt
+  "cohored" = "#b72810",
+  "den_mdred" = "#bd4444", #c81b16 alt
+  "den_ltorg" = "#f38a5a",
+  "den_dkorg" = "#b6592d",
+  "den_ltgrn" = "#aad8ce",
+  "den_green" = "#335441",
+  "den_mdblu" = "#637895",
+  "den_dkprp" = "#49313e",
+  "tongasslt" = "#91bd31",
+  "tongassmd" ="#537b1a",
+  "tongassdk" ="#1c3f06"
 )
 
-
-#JTP new 6
-# #fba04b, #ce3b40, #b05393, #33658a, #fc4a9d, #929ba0, #32c33c
 
 # red to blue gradient
 #212178, #584dac, #907ed9, #cab3fb, #f5f5f5, #fbb49f, #fc664a, #d70508, #8b0000
 
-# coho
-#905f3c, #d7663d, #6aafb4, #e7ac36, #453e36, #b72810
 
 
 #' Combine colors from a list
@@ -113,9 +124,11 @@ adfg_palettes <- list(
   `grays` = colorlister("gray4", "gray3", "gray2", "gray1"),
   `grays_bw` = colorlister("black", "gray4", "gray3", "gray2", "gray1", "white"),
   `berries` = colorlister("salmonberry", "huckleberry", "cloudberry", "strawberry", "berrypickinghands"),
-  `bristolbay` = colorlister("bb_orange", "bb_red", "bb_blue", "bb_green", "bb_pink", "bb_gray", "bb_violet")
+  `bristolbay` = colorlister("bb_orange", "bb_red", "bb_blue", "bb_green", "bb_pink", "bb_gray", "bb_violet"),
+  `coho` = colorlister("burntorange", "orangered", "cohoyellow", "cohobrown", "cohored", "cohoteal"),
+  `denali` = colorlister("den_dkprp", "den_ltorg", "den_ltgrn", "den_mdblu", "den_green", "den_mdred", "den_dkorg"),
+  `tongass` = colorlister("tongassdk", "tongassmd", "tongasslt")
 )
-
 
 
 
