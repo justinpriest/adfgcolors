@@ -62,11 +62,11 @@ library(adfgcolors)
 library(ggplot2)
 ggplot(mpg, aes(x=displ, y = cty, color = cyl)) +
   geom_point() + 
-  scale_color_adfg(palette = "aurora", discrete = FALSE) 
+  scale_color_adfg(palette = "alpenglow", discrete = FALSE) 
 
 ```
 
-Often, discrete variable plots look best if the exact order of colors are used (no interpolation):
+Often, discrete variable plots look best if the exact order of colors are used (no interpolation), using argument `useexact = TRUE`: 
 ```{r demoplotexact, fig.height=3}
 library(adfgcolors)
 library(ggplot2)
@@ -83,8 +83,8 @@ Colors are generally divided into two categories, discrete and continuous. Palet
 
 ### Continuous (Sequential) Palettes
 ```{r colordemos_cont, fig.height = 2, echo = FALSE}
-pallistcont <- c("glacier", "sitkasunset", "aurora", "grays_bw")
-# excluding "blues"
+pallistcont <- c("glacier", "sitkasunset", "alpenglow", "aurora", "grays_bw")
+# excluding "blues_light"
 
 for(j in 1:length(pallistcont)){
   display_palette(pallistcont[j], 7)
@@ -97,7 +97,7 @@ for(j in 1:length(pallistcont)){
 ### Discrete (Categorical) Palettes 
 _Consider using argument_ `useexact = TRUE` _when plotting discrete variables as it will use the exact order of palettes shown below._
 ```{r colordemos_disc, fig.height=2.25, echo = FALSE}
-pallistdisc <- c("totem", "logo",  "bristolbay", "discrete7")
+pallistdisc <- c("totem", "logo",  "bristolbay", "camai")
 optlen <- c(5, 6, 7, 7)
 
 for(j in 1:length(pallistdisc)){
@@ -130,21 +130,36 @@ display_palette_small <- function(name, n, ...) {
 par(mfrow=c(1,2))
 
 display_palette_small("rockfish", 7)
-display_palette_small("blues2", 7)
+display_palette_small("blues", 7)
 
 display_palette_small("grays", 7)
 display_palette_small("tongass", 7) 
+
+display_palette_small("nigaq", 7)
+display_palette_small("redblue", 7) 
 ```
 
 **More discrete palettes**
 ```{r otherpalettesdisc, fig.height=1.25, echo = FALSE}
 par(mfrow=c(1,2))
-display_palette_small("berries", 5)
-display_palette_small("coho", 6)
 
 display_palette_small("denali", 7)
-display_palette_small("tetrad", 4)
+display_palette_small("berry", 5)
+
+display_palette_small("coho", 6)
+display_palette_small("nome", 4)
 
 ```
+
+
+## Show Palette
+Before plotting, you can show the palette using function `display_palette()`. The arguments for this are the palette name and the number of colors to display. The associated "hex codes" are shown to assist users who may want to manually select colors for use in their own palette. 
+```{r displaypalettedemo, fig.height=3, out.width="75%", fig.align = "center"}
+
+display_palette("denali", 7)
+
+```
+
+
 
 

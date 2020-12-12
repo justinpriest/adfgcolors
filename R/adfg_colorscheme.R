@@ -13,7 +13,7 @@ adfg_colors <- c(
   "web_midblue" = "#537fa5",
   "darkberry" = "#903E2D",
   "eveningblue" = "#346A8D",
-  "mustard" = "#DD973F",
+  "wintersun" = "#DD973F",
   "spruce" = "#6DB287",
   "darkpurple" =  "#312740", #testing sunset
   "sunsetpurp" = "#905e79", #testing sunset
@@ -75,12 +75,24 @@ adfg_colors <- c(
   "den_dkprp" = "#49313e",
   "tongasslt" = "#91bd31",
   "tongassmd" ="#537b1a",
-  "tongassdk" ="#1c3f06"
+  "tongassdk" ="#1c3f06",
+  "alp_orng" = "#fca369",
+  "alp_pink" = "#ed6281",
+  "alp_purp" = "#463075",
+  "nq_blu" = "#2d8a96",
+  "nq_ylw" = "#e8dca2",
+  "nq_red" = "#bf554d",
+  "offwht" = "#f5f5f5"
 )
+# darker redblue
+#"#003843", "#f5f5f5", "#66000a"
+
+
 
 
 # red to blue gradient
 #212178, #584dac, #907ed9, #cab3fb, #f5f5f5, #fbb49f, #fc664a, #d70508, #8b0000
+
 
 
 
@@ -110,9 +122,9 @@ adfg_palettes <- list(
   # Order within this list to show which colors are first on plot
   `logo` = colorlister("adfg_blue", "ak_gold", "ice_blue",
                        "sea_green", "bou_tan", "bou_red"),
-  `blues` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
-  `blues2` = colorlister("web_dblue1", "web_midblue", "web_lblue2"),
-  `tetrad` = colorlister("darkberry", "eveningblue", "mustard", "spruce"),
+  `blues_light` = colorlister("web_dblue1", "web_lblue1", "web_lblue2", "ice_blue"),
+  `blues` = colorlister("web_dblue1", "web_midblue", "web_lblue2"), # from home page
+  `nome` = colorlister("darkberry", "eveningblue", "wintersun", "spruce"), #tetrad
   `sitkasunset` = colorlister("darkpurple",  "sunsetpurp", "sunsetyellow",
                               "sunsetorange", "sunsetred"),
   `aurora` = colorlister("auroragreen", "aurorablue", "aurorapurple"),
@@ -120,14 +132,22 @@ adfg_palettes <- list(
   `totem` = colorlister("totemred", "totemforest", "totemteal", "totemcedar",
                         "totemblack"),
   `rockfish` = colorlister("rockfishred", "rockfishorange", "rockfishyellow"),
-  `discrete7` = colorlister("darkturq", "tangyorange", "offred", "paleyellow", "coolblue" , "darklilac", "lightmint"),
+  `camai` = colorlister("darkturq", "tangyorange", "offred", "paleyellow",
+                        "coolblue" , "darklilac", "lightmint"),
   `grays` = colorlister("gray4", "gray3", "gray2", "gray1"),
   `grays_bw` = colorlister("black", "gray4", "gray3", "gray2", "gray1", "white"),
-  `berries` = colorlister("salmonberry", "huckleberry", "cloudberry", "strawberry", "berrypickinghands"),
-  `bristolbay` = colorlister("bb_orange", "bb_red", "bb_blue", "bb_green", "bb_pink", "bb_gray", "bb_violet"),
-  `coho` = colorlister("burntorange", "orangered", "cohoyellow", "cohobrown", "cohored", "cohoteal"),
-  `denali` = colorlister("den_dkprp", "den_ltorg", "den_ltgrn", "den_mdblu", "den_green", "den_mdred", "den_dkorg"),
-  `tongass` = colorlister("tongassdk", "tongassmd", "tongasslt")
+  `berry` = colorlister("salmonberry", "huckleberry", "cloudberry", "strawberry",
+                        "berrypickinghands"),
+  `bristolbay` = colorlister("bb_orange", "bb_red", "bb_blue", "bb_green",
+                             "bb_pink", "bb_gray", "bb_violet"),
+  `coho` = colorlister("burntorange", "orangered", "cohoyellow", "cohobrown",
+                       "cohored", "cohoteal"),
+  `denali` = colorlister("den_dkprp", "den_ltorg", "den_ltgrn", "den_mdblu",
+                         "den_green", "den_mdred", "den_dkorg"),
+  `tongass` = colorlister("tongassdk", "tongassmd", "tongasslt"),
+  `alpenglow` = colorlister("alp_orng", "alp_pink", "alp_purp"),
+  `nigaq` = colorlister("nq_blu", "nq_ylw", "nq_red"),
+  `redblue` = colorlister("nq_blu", "offwht", "nq_red")
 )
 
 
@@ -216,10 +236,11 @@ display_palette <- function(name, n, ...) {
 #'
 #' \code{scale_color_adfg} adds a color scale directly to an existing ggplot.
 #' Currently, continuous palette options are: "glacier", "sitkasunset",
-#' "aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
-#' options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
-#' For discrete scales, to use exact color palette without interpolation, use
-#' argument \code{useexact = TRUE}.
+#' "aurora", "alpenglow", "rockfish", "blues2", "tongass", "nigaq", "redblue",
+#' "grays", "grays_bw". Discrete palette options are: "totem", "logo", "nome",
+#' "berry", "bristolbay", "camai", "coho", and "denali". For discrete scales, to
+#' use exact color palettes without interpolation, use argument \code{useexact =
+#' TRUE}.
 #'
 #' @param palette Palette name.
 #' @param discrete TRUE/FALSE of whether aesthetic is discrete
@@ -265,10 +286,11 @@ scale_color_adfg <- function(palette = "logo", discrete = TRUE,  reverse = FALSE
 #'
 #' \code{scale_fill_adfg} adds a fill scale directly to an existing ggplot.
 #' Currently, continuous palette options are: "glacier", "sitkasunset",
-#' "aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
-#' options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
-#' For discrete scales, to use exact color palette without interpolation, use
-#' argument \code{useexact = TRUE}.
+#' "aurora", "alpenglow", "rockfish", "blues2", "tongass", "nigaq", "redblue",
+#' "grays", "grays_bw". Discrete palette options are: "totem", "logo", "nome",
+#' "berry", "bristolbay", "camai", "coho", and "denali". For discrete scales, to
+#' use exact color palettes without interpolation, use argument \code{useexact =
+#' TRUE}.
 #'
 #'
 #' @param palette Palette name

@@ -32,10 +32,11 @@ The output returned will be either an object of
 \description{
 \code{scale_color_adfg} adds a color scale directly to an existing ggplot.
 Currently, continuous palette options are: "glacier", "sitkasunset",
-"aurora", "rockfish", "bristolbay", "grays", "grays_bw". Discrete palette
-options are: "totem", "logo", "tetrad", "berries", "bristolbay", "discrete7".
-For discrete scales, to use exact color palette without interpolation, use
-argument \code{useexact = TRUE}.
+"aurora", "alpenglow", "rockfish", "blues2", "tongass", "nigaq", "redblue",
+"grays", "grays_bw". Discrete palette options are: "totem", "logo", "nome",
+"berry", "bristolbay", "camai", "coho", and "denali". For discrete scales, to
+use exact color palettes without interpolation, use argument \code{useexact =
+TRUE}.
 }
 \examples{
 \dontrun{

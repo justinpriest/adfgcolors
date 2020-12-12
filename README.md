@@ -68,13 +68,13 @@ library(adfgcolors)
 library(ggplot2)
 ggplot(mpg, aes(x=displ, y = cty, color = cyl)) +
   geom_point() + 
-  scale_color_adfg(palette = "aurora", discrete = FALSE) 
+  scale_color_adfg(palette = "alpenglow", discrete = FALSE) 
 ```
 
 <img src="man/figures/README-demoplotcolor-1.png" width="100%" />
 
 Often, discrete variable plots look best if the exact order of colors
-are used (no interpolation):
+are used (no interpolation), using argument `useexact = TRUE`:
 
 ``` r
 library(adfgcolors)
@@ -98,7 +98,7 @@ desired. To show palettes, use function `display_palette()`.
 
 ### Continuous (Sequential) Palettes
 
-<img src="man/figures/README-colordemos_cont-1.png" width="100%" /><img src="man/figures/README-colordemos_cont-2.png" width="100%" /><img src="man/figures/README-colordemos_cont-3.png" width="100%" /><img src="man/figures/README-colordemos_cont-4.png" width="100%" />
+<img src="man/figures/README-colordemos_cont-1.png" width="100%" /><img src="man/figures/README-colordemos_cont-2.png" width="100%" /><img src="man/figures/README-colordemos_cont-3.png" width="100%" /><img src="man/figures/README-colordemos_cont-4.png" width="100%" /><img src="man/figures/README-colordemos_cont-5.png" width="100%" />
 
 <br>
 
@@ -111,7 +111,22 @@ variables as it will use the exact order of palettes shown below.*
 ### Other Palettes
 
 **More continuous palettes**  
-<img src="man/figures/README-otherpalettescont-1.png" width="100%" /><img src="man/figures/README-otherpalettescont-2.png" width="100%" />
+<img src="man/figures/README-otherpalettescont-1.png" width="100%" /><img src="man/figures/README-otherpalettescont-2.png" width="100%" /><img src="man/figures/README-otherpalettescont-3.png" width="100%" />
 
 **More discrete palettes**
 <img src="man/figures/README-otherpalettesdisc-1.png" width="100%" /><img src="man/figures/README-otherpalettesdisc-2.png" width="100%" />
+
+## Show Palette
+
+Before plotting, you can show the palette using function
+`display_palette()`. The arguments for this are the palette name and the
+number of colors to display. The associated “hex codes” are shown to
+assist users who may want to manually select colors for use in their own
+palette.
+
+``` r
+
+display_palette("denali", 7)
+```
+
+<img src="man/figures/README-displaypalettedemo-1.png" width="75%" style="display: block; margin: auto;" />
